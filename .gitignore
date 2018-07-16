@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+project/thread_embeddings_by_tags/
 
 # C extensions
 *.so

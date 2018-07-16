@@ -49,8 +49,20 @@ def load_embeddings(embeddings_path):
     ########################
     #### YOUR CODE HERE ####
     ########################
-
-        pass 
+    
+    print("Loading Word Embedding")
+    f = open(embeddings_path,'r')
+    embeddings = {}
+    flag = 0
+    for line in f:
+        splitLine = line.split()
+        word = splitLine[0]
+        embedding = np.array([float(val) for val in splitLine[1:]])
+        if flag == 0:
+            embeddings_dim = len(embedding)
+        embeddings[word] = embedding
+    print("Done.",len(embeddings)," words loaded!")
+    return embeddings, embeddings_dim
 
 def question_to_vec(question, embeddings, dim):
     """Transforms a string to an embedding by averaging word embeddings."""
@@ -60,8 +72,14 @@ def question_to_vec(question, embeddings, dim):
     ########################
     #### YOUR CODE HERE ####
     ########################
-
-        pass
+    
+    count = 0   
+    Q2V = np.zeros(dim)
+    for tok in question.split():
+        if tok in embeddings:
+            Q2V += embeddings[tok]
+            count += 1
+    return Q2V/count if count!=0 else Q2V
 
 
 def unpickle_file(filename):
