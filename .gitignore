@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 project/thread_embeddings_by_tags/
+project/word_embeddings.tsv
 
 # C extensions
 *.so
