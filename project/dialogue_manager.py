@@ -32,6 +32,7 @@ class ThreadRanker(object):
         for i in range(len(thread_ids)):
             if i == 0:
                 mx_sim = cos_sim(question_vec, thread_embeddings[0])
+                best_thread = 0
                 continue
             if cos_sim(question_vec, thread_embeddings[i]) > mx_sim:
                 best_thread = i  #### YOUR CODE HERE ####
