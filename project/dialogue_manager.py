@@ -29,14 +29,18 @@ class ThreadRanker(object):
         question_vec = question_to_vec(question, self.word_embeddings, self.embeddings_dim) #### YOUR CODE HERE ####
 #        tag_w2v = unpickle_file(os.path.join(RESOURCE_PATH['THREAD_EMBEDDINGS_FOLDER'], os.path.normpath('%s.pkl' % tag_name))
 #        flag = 0
-        for i in range(len(thread_ids)):
-            if i == 0:
-                mx_sim = cos_sim(question_vec, thread_embeddings[0])
-                best_thread = 0
-                continue
-            if cos_sim(question_vec, thread_embeddings[i]) > mx_sim:
-                best_thread = i  #### YOUR CODE HERE ####
-        
+
+        [best_thread] = pairwise_distances_argmin(X=question_vec.reshape(1, self.embeddings_dim),
+                                                Y=thread_embeddings,
+                                                metric='cosine')
+#        for i in range(len(thread_ids)):
+#            if i == 0:
+#                mx_sim = cos_sim(question_vec, thread_embeddings[0])
+#                best_thread = 0
+#                continue
+#            if cos_sim(question_vec, thread_embeddings[i]) > mx_sim:
+#                best_thread = i  #### YOUR CODE HERE ####
+#        print(best_thread)
         return thread_ids[best_thread]
 
 
